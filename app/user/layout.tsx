@@ -1,12 +1,22 @@
-'use client'
+"use client"
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useAuth } from '@/lib/auth-context'
-import { AppSidebar } from '@/components/app-sidebar'
-import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { Separator } from '@/components/ui/separator'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
+import type React from "react"
+
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useAuth } from "@/lib/auth-context"
+import { AppSidebar } from "@/components/app-sidebar"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { Separator } from "@/components/ui/separator"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Footer } from "@/components/footer"
 
 export default function UserLayout({
   children,
@@ -18,13 +28,13 @@ export default function UserLayout({
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/login')
-    } else if (role !== 'user') {
-      router.push('/admin/dashboard')
+      router.push("/login")
+    } else if (role !== "user") {
+      router.push("/admin/dashboard")
     }
   }, [isAuthenticated, role, router])
 
-  if (!isAuthenticated || role !== 'user') {
+  if (!isAuthenticated || role !== "user") {
     return null
   }
 
@@ -32,7 +42,7 @@ export default function UserLayout({
     <div className="theme-user">
       <SidebarProvider>
         <AppSidebar />
-        <SidebarInset>
+        <SidebarInset className="flex flex-col min-h-screen">
           <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
             <div className="flex items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
@@ -50,9 +60,8 @@ export default function UserLayout({
               </Breadcrumb>
             </div>
           </header>
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-            {children}
-          </div>
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+          <Footer />
         </SidebarInset>
       </SidebarProvider>
     </div>

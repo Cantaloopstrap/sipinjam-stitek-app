@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,13 +9,13 @@
   --user-primary-foreground: oklch(1 0 0);
   --user-accent: oklch(0.65 0.15 250);
   --user-accent-foreground: oklch(1 0 0);
-  
+
   /* Admin Theme - Orange */
   --admin-primary: oklch(0.65 0.2 40);
   --admin-primary-foreground: oklch(1 0 0);
   --admin-accent: oklch(0.75 0.15 40);
   --admin-accent-foreground: oklch(0.2 0 0);
-  
+
   /* Base colors */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -104,8 +104,8 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -160,15 +160,37 @@
 }
 
 .sidebar-blur::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/placeholder.svg?height=1000&width=400');
+  background-image: url("/placeholder.svg?height=1000&width=400");
   background-size: cover;
   background-position: center;
   filter: blur(8px) brightness(0.3);
+  z-index: -1;
+}
+
+/* Added dashboard background blur effect */
+.dashboard-bg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.dashboard-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/placeholder.svg?height=1080&width=1920");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: blur(6px) brightness(0.4);
   z-index: -1;
 }
